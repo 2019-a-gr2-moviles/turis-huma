@@ -5,56 +5,58 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".RegisterActivity" android:background="#28536B">
+        tools:context=".RegisterActivity" android:background="#166577">
 
     <TextView
             android:text="Formulario de Registro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/registerTitle" android:layout_alignParentEnd="true"
-            android:layout_marginEnd="104dp" android:layout_alignParentStart="true" android:layout_marginStart="109dp"
+            android:layout_width="276dp"
+            android:layout_height="45dp" android:id="@+id/registerTitle" android:layout_alignParentEnd="true"
+            android:layout_marginEnd="65dp" android:layout_alignParentStart="true" android:layout_marginStart="70dp"
             android:layout_marginTop="36dp"
             android:textAlignment="center" android:fontFamily="@font/muli_light"
-            android:textSize="18sp" android:textColor="#FFEB3B" android:layout_below="@+id/imageView"
+            android:textSize="20sp" android:textColor="#FFEB3B" android:layout_below="@+id/imageView"
     />
 
     <EditText
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:gravity="start|top"
             android:ems="10"
-            android:id="@+id/txtNombre" android:layout_alignParentEnd="true" android:layout_marginEnd="19dp"
-            android:layout_alignParentStart="true" android:layout_marginStart="38dp" android:layout_marginTop="48dp"
-            android:layout_below="@+id/registerTitle" android:textSize="14sp" android:fontFamily="@font/muli_light"
+            android:id="@+id/txtNombre" android:layout_alignParentEnd="true" android:layout_marginEnd="24dp"
+            android:layout_alignParentStart="true" android:layout_marginStart="33dp" android:layout_marginTop="44dp"
+            android:layout_below="@+id/registerTitle" android:textSize="18sp" android:fontFamily="@font/muli_light"
             android:background="@drawable/inputs"
-            android:hint="Nombre de Usuario" android:textAlignment="center" android:drawableLeft="@drawable/mail-icon"/>
+            android:hint="  Nombre de Usuario" android:textAlignment="textStart"
+            android:drawableLeft="@drawable/icon_user96"
+    />
     <EditText
             android:layout_width="wrap_content"
-            android:layout_height="41dp"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/txtEmail" android:layout_marginTop="29dp" android:layout_below="@+id/txtNombre"
-            android:layout_marginEnd="1dp" android:layout_alignEnd="@+id/txtNombre" android:layout_marginStart="3dp"
-            android:layout_alignStart="@+id/txtNombre" android:fontFamily="@font/muli_light"
-            android:background="@drawable/inputs" android:hint="E-Mail"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
+            android:layout_height="37dp"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/txtPassword" android:layout_marginEnd="3dp" android:layout_alignEnd="@+id/txtEmail"
-            android:layout_marginStart="1dp" android:layout_alignStart="@+id/txtEmail"
-            android:layout_marginTop="29dp" android:layout_below="@+id/txtEmail" android:background="@drawable/inputs"
-            android:hint="Contraseña"/>
+            android:id="@+id/txtEmail" android:layout_marginEnd="-2dp" android:layout_alignEnd="@+id/txtNombre"
+            android:layout_marginStart="1dp" android:layout_alignStart="@+id/txtNombre"
+            android:layout_marginTop="29dp" android:layout_below="@+id/txtNombre" android:background="@drawable/inputs"
+            android:hint="   E-Mail"
+            android:drawableLeft="@drawable/icon_mail96"/>
+    <EditText
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/txtPassword" android:layout_marginEnd="0dp" android:layout_alignEnd="@+id/txtEmail"
+            android:layout_marginStart="-2dp" android:layout_alignStart="@+id/txtEmail"
+            android:layout_marginTop="31dp" android:layout_below="@+id/txtEmail" android:background="@drawable/inputs"
+            android:hint="  Contraseña" android:drawableLeft="@drawable/icon_psswd96"/>
     <EditText
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
+            android:layout_height="37dp"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/txtPasswordConfirm" android:layout_marginTop="32dp" android:layout_below="@+id/txtPassword"
             android:layout_marginEnd="-2dp" android:layout_alignEnd="@+id/txtPassword" android:layout_marginStart="-2dp"
             android:layout_alignStart="@+id/txtPassword" android:background="@drawable/inputs"
-            android:fontFamily="@font/muli_light" android:hint="Confirmar Contraseña"/>
+            android:fontFamily="@font/muli_light" android:hint="  Confirmar Contraseña" android:drawableLeft="@drawable/icon_psswd96"/>
     <ImageView
             android:layout_width="196dp"
             android:layout_height="193dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
@@ -64,13 +66,12 @@
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:inputType="textMultiLine"
-            android:gravity="start|top"
             android:ems="10"
-            android:id="@+id/txtCountry" android:layout_marginTop="26dp"
-            android:layout_below="@+id/txtPasswordConfirm" android:layout_marginEnd="7dp"
-            android:layout_alignEnd="@+id/txtPasswordConfirm" android:layout_marginStart="1dp"
+            android:id="@+id/txtCountry" android:layout_marginTop="27dp"
+            android:layout_below="@+id/txtPasswordConfirm" android:layout_marginEnd="-1dp"
+            android:layout_alignEnd="@+id/txtPasswordConfirm" android:layout_marginStart="-3dp"
             android:layout_alignStart="@+id/txtPasswordConfirm" android:fontFamily="@font/muli_light"
-            android:background="@drawable/inputs" android:hint="País de Residencia"/>
+            android:background="@drawable/inputs" android:hint="  País de Residencia" android:drawableLeft="@drawable/icon_country96"/>
     <ImageButton
             android:layout_width="89dp"
             android:layout_height="77dp" android:id="@+id/btnBack"
