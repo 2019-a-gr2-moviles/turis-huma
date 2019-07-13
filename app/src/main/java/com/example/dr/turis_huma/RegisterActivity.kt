@@ -13,34 +13,34 @@ import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.view.*
 import com.google.firebase.auth.FirebaseAuth
-
+import kotlinx.android.synthetic.main.activity_register.*
 
 
 class RegisterActivity : AppCompatActivity() {
 
-    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val loadingBar:ProgressDialog = ProgressDialog.show(this,"Creando nueva cuenta","Espere mientras creamos su cuenta")
+    // private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    // private val loadingBar:ProgressDialog = ProgressDialog.show(this,"Creando nueva cuenta","Espere mientras creamos su cuenta")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val userName:EditText = findViewById(R.id.txtNombre)
+        val userName:EditText = txtNombre
         val userEmail:EditText = findViewById(R.id.txtEmail)
         val userPassword :EditText= findViewById(R.id.txtPassword)
         val userConfirmPassword :EditText= findViewById(R.id.txtPasswordConfirm)
         val userCountry :EditText= findViewById(R.id.txtCountry)
-        val createAccountButton : ImageButton = findViewById(R.id.btnNext2)
+        //val createAccountButton : ImageButton = findViewById(R.id.btnNext2)
 
 
 
-        createAccountButton.setOnClickListener(){
-            createNewAccount(userName, userEmail, userPassword, userConfirmPassword,userCountry)
-        }
+       // createAccountButton.setOnClickListener(){
+           // createNewAccount(userName, userEmail, userPassword, userConfirmPassword,userCountry)
+        //}
     }
 
 
-    fun createNewAccount(username:EditText, email:EditText, pass:EditText, confPass:EditText, country:EditText){
+   /* fun createNewAccount(username:EditText, email:EditText, pass:EditText, confPass:EditText, country:EditText){
         val userValue = username.text.toString()
         val userEmail = email.text.toString()
         val userPassword = pass.text.toString()
@@ -76,6 +76,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-
+*/
 
 }
