@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
 
-    // private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    // private val loadingBar:ProgressDialog = ProgressDialog.show(this,"Creando nueva cuenta","Espere mientras creamos su cuenta")
+    val mAuth: FirebaseAuth ?= FirebaseAuth.getInstance()
+    private val loadingBar:ProgressDialog = ProgressDialog.show(this,"Creando nueva cuenta","Espere mientras creamos su cuenta")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +30,17 @@ class RegisterActivity : AppCompatActivity() {
         val userPassword :EditText= findViewById(R.id.txtPassword)
         val userConfirmPassword :EditText= findViewById(R.id.txtPasswordConfirm)
         val userCountry :EditText= findViewById(R.id.txtCountry)
-        //val createAccountButton : ImageButton = findViewById(R.id.btnNext2)
+        val createAccountButton : ImageButton = register_next_button
 
 
 
-       // createAccountButton.setOnClickListener(){
-           // createNewAccount(userName, userEmail, userPassword, userConfirmPassword,userCountry)
-        //}
+        createAccountButton.setOnClickListener{
+           createNewAccount(userName, userEmail, userPassword, userConfirmPassword,userCountry)
+        }
     }
 
 
-   /* fun createNewAccount(username:EditText, email:EditText, pass:EditText, confPass:EditText, country:EditText){
+   fun createNewAccount(username:EditText, email:EditText, pass:EditText, confPass:EditText, country:EditText){
         val userValue = username.text.toString()
         val userEmail = email.text.toString()
         val userPassword = pass.text.toString()
@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
 
             loadingBar
             loadingBar.setCanceledOnTouchOutside(true)
-            mAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener{
+            mAuth?.createUserWithEmailAndPassword(userEmail,userPassword)?.addOnCompleteListener{
                 task ->
                 if (task.isSuccessful){
                     Toast.makeText(this,"El usuario ha sido creado exitosamente",Toast.LENGTH_SHORT).show()
@@ -76,6 +76,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-*/
+
 
 }
