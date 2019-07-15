@@ -6,5 +6,6 @@
           android:id="@+id/nav_qr_scanner"/>
     <item android:title="@string/nav_profile" android:icon="@drawable/twotone_person_black_24dp"
           android:id="@+id/nav_profile"/>
-    <item android:title="@string/nav_info" android:icon="@drawable/twotone_help_black_24dp" android:id="@+id/nav_info"/>
+    <item android:title="@string/nav_info" android:icon="@drawable/twotone_help_black_24dp" android:id="@+id/nav_info"
+    />
 </menu>

@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btn_menuPrincipal.setOnClickListener {
-            val Intent = Intent(this,AppMenuActivity::class.java)
+            val Intent = Intent(this,MapsActivity::class.java)
             startActivity(Intent)
         }
     }
