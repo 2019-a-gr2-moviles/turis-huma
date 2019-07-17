@@ -42,19 +42,26 @@
             android:layout_width="wrap_content"
             android:layout_height="37dp" android:id="@+id/register_link" android:layout_marginEnd="-1dp"
             android:layout_alignEnd="@+id/login_password" android:layout_marginStart="4dp"
-            android:layout_alignStart="@+id/login_password" android:layout_marginTop="202dp"
+            android:layout_alignStart="@+id/login_password" android:layout_marginTop="243dp"
             android:layout_below="@+id/login_password" android:textAlignment="center"
             android:fontFamily="@font/muli_light" android:textColor="@android:color/white"/>
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/facebook_logo"
             android:id="@+id/facebook_login"
-            android:layout_marginTop="43dp" android:layout_below="@+id/login_password"
+            android:layout_marginTop="96dp" android:layout_below="@+id/login_password"
             android:background="@android:color/transparent" android:layout_alignParentStart="true"
             android:layout_marginStart="63dp"/>
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/google_logo" android:id="@+id/google_login"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="57dp" android:layout_marginTop="40dp"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="65dp" android:layout_marginTop="93dp"
             android:layout_below="@+id/login_password" android:background="@android:color/transparent"/>
+    <Button
+            android:text="Ingresar"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content" android:id="@+id/login_button" android:layout_alignParentEnd="true"
+            android:layout_marginEnd="141dp" android:layout_alignParentStart="true" android:layout_marginStart="150dp"
+            android:layout_marginTop="24dp" android:layout_below="@+id/login_password"
+            android:background="@drawable/button" android:fontFamily="@font/muli_light"/>
 </RelativeLayout>
