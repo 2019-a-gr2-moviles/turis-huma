@@ -1,16 +1,11 @@
 package com.example.dr.turis_huma
 
-import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
-import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.widget.Toast
-import com.google.android.gms.location.*
+import android.util.Log
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,30 +13,17 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(),
+    OnMapReadyCallback,
+    GoogleMap.OnCameraMoveStartedListener,
+    GoogleMap.OnCameraMoveListener,
+    GoogleMap.OnCameraIdleListener,
+    GoogleMap.OnPolylineClickListener,
+    GoogleMap.OnPolygonClickListener{
 
     private lateinit var mMap: GoogleMap
+    private var tienePermisosLocalizacion = false
 
-    private val messageDenied: String = "PERMISO DENEGADO"
-        //getString(R.string.message_gps_denied)
-    private val messageYourPosition: String = "TU POSICION"
-            //getString(R.string.label_gps_your_position)
-
-
-    private var latitude:Double=0.toDouble()
-    private var longitude:Double=0.toDouble()
-
-    private lateinit var mLastLocation:Location
-    private var mMarker:Marker?=null
-
-    //LOCATION
-    lateinit var fusedLocationProviderClass: FusedLocationProviderClient
-    lateinit var locationRequest: LocationRequest
-    lateinit var locationCallback: LocationCallback
-
-    companion object {
-        private val MY_PERMISSION_CODE:Int  = 1000
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,141 +33,141 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(checkLocationPermission()) {
-                buildLocationRequest()
-                buildLocationCallBack()
-
-                fusedLocationProviderClass = LocationServices.getFusedLocationProviderClient(
-                    this
-                )
-                fusedLocationProviderClass.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
-            }
-        } else
-        {
-            buildLocationRequest()
-            buildLocationCallBack()
-
-            fusedLocationProviderClass = LocationServices.getFusedLocationProviderClient(
-                this
-            )
-            fusedLocationProviderClass.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
-        }
-
     }
-
-
-
-    private fun checkLocationPermission():Boolean {
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED )
-        {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
-            {
-                ActivityCompat.requestPermissions(this, arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ),MY_PERMISSION_CODE)
-            } else {
-                ActivityCompat.requestPermissions(this, arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ),MY_PERMISSION_CODE)
-            }
-            return false
-
-        }else
-        {
-            return true
-        }
-    }
-
-    private fun buildLocationRequest() {
-        locationRequest = LocationRequest()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 5000
-        locationRequest.fastestInterval= 3000
-        locationRequest.smallestDisplacement = 10f
-    }
-
-    private fun buildLocationCallBack() {
-
-        locationCallback = object  : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult?) {
-                mLastLocation = p0!!.locations.get(p0!!.locations.size - 1)
-
-
-                if (mMarker != null) {
-                    mMarker!!.remove()
-                }
-
-                latitude = mLastLocation.latitude
-                longitude = mLastLocation.longitude
-
-                val latLng = LatLng(latitude, longitude)
-                val markerOptions = MarkerOptions()
-                    .position(latLng)
-                    .title(messageYourPosition)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                mMarker = mMap.addMarker(markerOptions)
-
-                mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-                mMap!!.animateCamera(CameraUpdateFactory.zoomTo(11f))
-            }
-        }
-    }
-
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode)
-        {
-            MY_PERMISSION_CODE-> {
-                if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-                    {
-                        if(checkLocationPermission())
-                        {
-                            buildLocationRequest()
-                            buildLocationCallBack()
-
-                            fusedLocationProviderClass = LocationServices.getFusedLocationProviderClient(
-                                this
-                            )
-                            fusedLocationProviderClass.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
-
-                            mMap!!.isMyLocationEnabled = true
-                        }
-                    }
-                } else {
-                    Toast.makeText(this,messageDenied,Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-    }
-
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        getLocationPermissions()
+        setMapConfiguration(mMap)
+        setListenersMapMovements(mMap)
+        val foch = LatLng(-0.202760, -78.490813)
+        val titulo = "Plaza foch"
+        val zoom = 17f
+        addMarker(foch, titulo)
+        moveCameraWithZoom(foch, zoom)
+        setNearByPlaces(googleMap)
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                mMap!!.isMyLocationEnabled = true
-            }
 
+    fun setListenersMapMovements(map:GoogleMap){
+        with(map) {
+            setOnCameraIdleListener(this@MapsActivity)
+            setOnCameraMoveStartedListener(this@MapsActivity)
+            setOnCameraMoveListener(this@MapsActivity)
+
+            setOnPolylineClickListener(this@MapsActivity)
+            setOnPolygonClickListener(this@MapsActivity)
         }
-        else
-            mMap!!.isMyLocationEnabled = true
+    }
 
-        mMap.uiSettings.isZoomControlsEnabled = true
+    fun addMarker(latLng: LatLng, title:String){
+        mMap.addMarker(
+            MarkerOptions()
+                .position(latLng)
+                .title(title)
+        )
+    }
+
+    fun moveCameraWithZoom(latLng: LatLng, zoom: Float = 10f){
+        mMap.moveCamera(
+            CameraUpdateFactory
+                .newLatLngZoom(latLng, zoom)
+        )
+    }
+
+    fun setMapConfiguration(mapa:GoogleMap){
+        val contexto = this.applicationContext
+        with(mapa){
+
+            val permisoFineLocation = ContextCompat
+                .checkSelfPermission(
+                    contexto,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            val tienePermiso = permisoFineLocation == PackageManager.PERMISSION_GRANTED
+            if(tienePermiso){
+                mapa.isMyLocationEnabled = true
+            }
+            this.uiSettings.isZoomControlsEnabled = true
+            uiSettings.isMyLocationButtonEnabled = true
+        }
+    }
+
+    fun getLocationPermissions(){
+        val permisoFineLocation = ContextCompat
+            .checkSelfPermission(
+                this.applicationContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            )
+
+        val tienePermiso = permisoFineLocation == PackageManager.PERMISSION_GRANTED
+
+        if(tienePermiso){
+            Log.i("mapa","Tiene permisos de FINE_LOCATION")
+            this.tienePermisosLocalizacion = true
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                ),
+                1  // Codigo que vamos a esperar
+            )
+        }
+    }
+
+    fun setNearByPlaces(googleMap: GoogleMap){
+        val poligonoUno = googleMap
+            .addPolygon(
+                PolygonOptions()
+                    .clickable(true)
+                    .add(
+                        LatLng(-0.209431, -78.490078),
+                        LatLng(-0.208734, -78.488951),
+                        LatLng(-0.209431, -78.488286),
+                        LatLng(-0.210085, -78.489745)
+                    )
+            )
+        poligonoUno.fillColor = -0xc771c4
+
+        val poligonoDos = googleMap
+            .addPolygon(
+                PolygonOptions()
+                    .clickable(true)
+                    .add(
+                        LatLng(-0.208743, -78.496033),
+                        LatLng(-0.210741, -78.498213),
+                        LatLng(-0.210462, -78.500616),
+                        LatLng(-0.206886, -78.499252)
+                    )
+            )
+        poligonoDos.fillColor = -0xc771c4
 
     }
 
-    override fun onStop() {
-        fusedLocationProviderClass.removeLocationUpdates(locationCallback)
-        super.onStop()
+
+
+    override fun onCameraMove() {
+        Log.i("map","Me estoy moviendo")
     }
+
+    override fun onCameraIdle() {
+        Log.i("map","Me quede quieto")
+    }
+
+    override fun onCameraMoveStarted(p0: Int) {
+        Log.i("map","Me voy a empezar a mover")
+    }
+
+    override fun onPolylineClick(p0: Polyline?) {
+        Log.i("map","Polylinea ${p0.toString()}")
+    }
+
+    override fun onPolygonClick(p0: Polygon?) {
+        Log.i("map","Polygono ${p0.toString()}")
+    }
+
+
 
 
 }
