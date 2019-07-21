@@ -4,14 +4,21 @@ import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.widget.TextView
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class MapsActivity : AppCompatActivity(),
     OnMapReadyCallback,
@@ -30,10 +37,12 @@ class MapsActivity : AppCompatActivity(),
         setContentView(R.layout.activity_maps)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+            .findFragmentById(R.id.fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
+        assignFragments()
     }
+
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -46,6 +55,66 @@ class MapsActivity : AppCompatActivity(),
         addMarker(foch, titulo)
         moveCameraWithZoom(foch, zoom)
         setNearByPlaces(googleMap)
+    }
+
+
+    fun assignFragments() {
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_map -> {
+                    openMapFragment()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.nav_qr_scanner -> {
+                    openCameraFragment()
+                    return@setOnNavigationItemSelectedListener true
+
+                }
+                R.id.nav_profile -> {
+                    openProfileFragment()
+                    return@setOnNavigationItemSelectedListener true
+
+                }
+                R.id.nav_info -> {
+                    openInfoFragment()
+                    return@setOnNavigationItemSelectedListener true
+
+                }
+            }
+            false
+        }
+    }
+
+    private fun openMapFragment() {
+        val fragment = MapFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun openCameraFragment() {
+        val fragment = CameraFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun openProfileFragment() {
+        val fragment = ProfileFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun openInfoFragment() {
+        val fragment = InfoFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 
@@ -143,6 +212,8 @@ class MapsActivity : AppCompatActivity(),
             )
         poligonoDos.fillColor = -0xc771c4
 
+
+
     }
 
 
@@ -166,6 +237,7 @@ class MapsActivity : AppCompatActivity(),
     override fun onPolygonClick(p0: Polygon?) {
         Log.i("map","Polygono ${p0.toString()}")
     }
+
 
 
 

@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".CameraFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.wonderkiln.camerakit.CameraView
+            android:id="@+id/camera_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+    ></com.wonderkiln.camerakit.CameraView>
 
-</FrameLayout>
+    <com.example.dr.turis_huma.Helper.GraphicOverlay
+            android:id="@+id/graphic_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
+
+    <Button
+            android:id="@+id/btn_detect"
+            android:text="@string/detect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginBottom="0dp"
+            android:layout_alignBottom="@+id/graphic_overlay"
+            android:background="@color/colorPrimary"/>
+
+</RelativeLayout>
