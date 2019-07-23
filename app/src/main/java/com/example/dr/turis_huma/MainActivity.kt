@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         val currentUser:FirebaseUser ?= mAuth.currentUser
         if(currentUser == null){
             sendUserToLoginActivity()

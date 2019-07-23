@@ -15,6 +15,16 @@
       },
       "oauth_client": [
         {
+
+          "client_id": "350715635412-ff2a203rpqkdd71p4cps6igquaqftt11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dr.turis_huma",
+            "certificate_hash": "2621905c9f49dd9b6187463c46c4d9a015184eb3"
+          }
+        },
+        {
+
           "client_id": "350715635412-8ocq5luqk0dradkoksroc85lj2gp07ql.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
