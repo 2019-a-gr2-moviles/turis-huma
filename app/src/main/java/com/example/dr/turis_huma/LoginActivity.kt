@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         }else if (TextUtils.isEmpty(passwordUser)){
             Toast.makeText(this,"Ingrese la contraseña",Toast.LENGTH_SHORT).show()
         }else{
-            mAuth!!.signInWithEmailAndPassword(emailUserName, passwordUser).addOnCompleteListener(object :
+            /*mAuth!!.signInWithEmailAndPassword(emailUserName, passwordUser).addOnCompleteListener(object :
                 OnCompleteListener<AuthResult> {
                 override fun onComplete(task: Task<AuthResult>) {
                     if (task.isSuccessful) {
@@ -59,7 +59,9 @@ class LoginActivity : AppCompatActivity() {
 
                     }
                 }
-            })
+            })*/
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
         }
 
     }
