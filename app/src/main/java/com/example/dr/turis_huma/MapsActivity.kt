@@ -40,6 +40,7 @@ class MapsActivity : AppCompatActivity(),
             .findFragmentById(R.id.fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         assignFragments()
+        openMapFragment()
     }
 
 

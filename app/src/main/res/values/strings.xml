@@ -15,6 +15,6 @@
     <string name="search">Buscar</string>
     <string name="info_places">Lugares Cercanos</string>
     <string name="detect">Detectar</string>
-    <string name="wait_please">Espera Porfavor</string>
+    <string name="wait_please">"Espera Porfavor"</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.example.dr.turis_huma
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -12,7 +13,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import com.example.dr.turis_huma.Helper.GraphicOverlay
 import com.example.dr.turis_huma.Helper.RectOverlay
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
@@ -39,16 +42,20 @@ class CameraFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    private var waiting_dialog: AlertDialog? = null
+    private var mAlertDialog: AlertDialog? = null
+    private var btnDetect: Button? = null
+    private var mCameraView: CameraView? = null
+    private var mGraphicOverlay: GraphicOverlay? = null
+
 
     override fun onResume() {
         super.onResume()
-        camera_view.start()
+        mCameraView!!.start()
     }
 
     override fun onPause() {
         super.onPause()
-        camera_view.stop()
+        mCameraView!!.stop()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +64,6 @@ class CameraFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
 
     }
 
@@ -69,16 +74,25 @@ class CameraFragment : Fragment() {
 
 
         val view = inflater.inflate(R.layout.fragment_camera, container, false)
+        btnDetect = view.findViewById(R.id.btn_detect)
+        mCameraView = view.findViewById(R.id.camera_view)
+        mGraphicOverlay = view.findViewById(R.id.graphic_overlay)
+        var activity = activity as AppCompatActivity?
 
-        waiting_dialog = SpotsDialog.Builder().setMessage(R.string.wait_please).setCancelable(false).build()
+        mAlertDialog = AlertDialog.Builder(activity!!).setMessage(R.string.wait_please).setCancelable(false).create()
 
-        btn_detect.setOnClickListener {
-            camera_view.start()
-            camera_view.captureImage()
-            graphic_overlay.clear()
+        //mAlertDialog = SpotsDialog.Builder().setMessage(R.string.wait_please).setCancelable(false).build()
+
+
+
+
+        btnDetect!!.setOnClickListener {
+            mCameraView!!.start()
+            mCameraView!!.captureImage()
+            mGraphicOverlay!!.clear()
         }
 
-        camera_view.addCameraKitListener(object: CameraKitEventListener{
+        mCameraView!!.addCameraKitListener(object: CameraKitEventListener{
             override fun onVideo(p0: CameraKitVideo?) {
 
             }
@@ -87,10 +101,10 @@ class CameraFragment : Fragment() {
             }
 
             override fun onImage(p0: CameraKitImage?) {
-                waiting_dialog!!.show()
+                mAlertDialog!!.show()
                 var bitmap = p0!!.bitmap
                 bitmap = Bitmap.createScaledBitmap(bitmap, camera_view.width, camera_view.height, false)
-                camera_view.stop()
+                mCameraView!!.stop()
 
                 runDetector(bitmap)
 
@@ -173,7 +187,7 @@ class CameraFragment : Fragment() {
 
         }
 
-        waiting_dialog!!.dismiss()
+        mAlertDialog!!.dismiss()
     }
 
 

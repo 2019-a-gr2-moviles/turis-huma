@@ -6,6 +6,12 @@
              tools:context=".InfoFragment">
 
 
+
+    <include
+            layout="@layout/app_bar_drawer"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
     <android.support.v4.widget.DrawerLayout
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="238dp"
@@ -14,11 +20,6 @@
             android:keepScreenOn="true"
             android:hapticFeedbackEnabled="true">
 
-
-        <include
-                layout="@layout/app_bar_drawer"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
 
 
         <android.support.design.widget.NavigationView

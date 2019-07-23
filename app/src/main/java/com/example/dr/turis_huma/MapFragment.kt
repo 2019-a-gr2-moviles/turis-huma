@@ -66,13 +66,13 @@ class MapFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener 
         var activity = activity as AppCompatActivity?
         activity!!.setSupportActionBar(mToolbar)
         mDrawer = view.findViewById(R.id.drawer_layout)
-        mDrawerToggle = ActionBarDrawerToggle(getActivity(), mDrawer, mToolbar, R.string.open, R.string.closed)
+        activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mDrawerToggle = ActionBarDrawerToggle(activity, mDrawer, mToolbar, R.string.open, R.string.closed)
         mDrawer!!.addDrawerListener(mDrawerToggle!!)
         mDrawerToggle !!.syncState()
         mDesignNavigationView = view.findViewById(R.id.design_navigation_view)
         mDesignNavigationView!!.setNavigationItemSelectedListener(this)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activity.supportActionBar?.setHomeButtonEnabled(true)
+
 
         return view
     }
