@@ -10,5 +10,6 @@
     <color name="colorLightYellow">#F9DEC9</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorLigthBlack">#615C5C</color>
+    <color name="colorAccent">#f2be13</color>
 </resources>
 
