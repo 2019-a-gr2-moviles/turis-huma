@@ -67,7 +67,7 @@ class MapFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener 
         activity!!.setSupportActionBar(mToolbar)
         mDrawer = view.findViewById(R.id.drawer_layout)
         activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        mDrawerToggle = ActionBarDrawerToggle(activity, mDrawer, mToolbar, R.string.open, R.string.closed)
+        mDrawerToggle = ActionBarDrawerToggle(activity, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         mDrawer!!.addDrawerListener(mDrawerToggle!!)
         mDrawerToggle !!.syncState()
         mDesignNavigationView = view.findViewById(R.id.design_navigation_view)
