@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "350715635412",
+    "firebase_url": "https://turis-huma.firebaseio.com",
+    "project_id": "turis-huma",
+    "storage_bucket": "turis-huma.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350715635412:android:f54d53f2bea15778",
+        "android_client_info": {
+          "package_name": "com.example.dr.turis_huma"
+        }
+      },
+      "oauth_client": [
+        {
+
+          "client_id": "350715635412-ff2a203rpqkdd71p4cps6igquaqftt11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dr.turis_huma",
+            "certificate_hash": "2621905c9f49dd9b6187463c46c4d9a015184eb3"
+          }
+        },
+        {
+
+          "client_id": "350715635412-8ocq5luqk0dradkoksroc85lj2gp07ql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dr.turis_huma",
+            "certificate_hash": "67a9365af3d20371b16e42e2588779ffc2cb70ff"
+          }
+        },
+        {
+          "client_id": "350715635412-tnoo27cd4puiqbo9n9330doofkhksclc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjtmXK1owiu4c5Qa3MCGfCKxSjTeb1k_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350715635412-tnoo27cd4puiqbo9n9330doofkhksclc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
