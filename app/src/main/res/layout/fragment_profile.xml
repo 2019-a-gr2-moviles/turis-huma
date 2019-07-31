@@ -4,7 +4,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".ProfileFragment"
-             android:background="@color/cardview_light_background">
+            android:background="@color/colorWhite">
 
     <RelativeLayout
             android:id="@+id/rellay1"
@@ -41,7 +41,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15sp"
                 android:fontFamily="sans-serif-light"
-                android:text="Joey Tribbiani"
+                android:text="Jacinto Palma"
                 android:textColor="@color/white"
                 android:textSize="32sp" />
 
@@ -184,9 +184,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="joey@sharenofood.com"
+                        android:text="jacinto.palma@epn.edu.ec"
                         android:textColor="#000000"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"/>
 
                 <View
                         android:layout_width="match_parent"
@@ -205,7 +205,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Númro de Teléfono"
+                        android:text="Número de Teléfono"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -271,9 +271,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="facebook.com/joeytrib"
+                        android:text="facebook.com/joacif"
                         android:textColor="#000000"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"/>
 
                 <View
                         android:layout_width="match_parent"

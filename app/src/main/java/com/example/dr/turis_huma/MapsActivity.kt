@@ -144,7 +144,7 @@ class MapsActivity : AppCompatActivity(),
     private fun openProfileFragment() {
         val fragment = ProfileFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment, fragment)
+        transaction.add(R.id.fragment, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
