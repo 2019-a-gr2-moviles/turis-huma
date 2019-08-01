@@ -2,29 +2,24 @@ package com.example.dr.turis_huma
 
 
 import android.content.Context
-import android.content.res.Configuration
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.ActionBarContextView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
-import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.fragment_map.*
-import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.android.synthetic.main.toolbar.view.*
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuInflater
-
-
-
-
+import android.widget.Button
+import android.widget.Toast
+import com.hbb20.CountryCodePicker
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 private const val ARG_PARAM1 = "param1"
@@ -43,6 +38,9 @@ class MapFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener 
     private var mDrawerToggle: ActionBarDrawerToggle? = null
     private var mDesignNavigationView: NavigationView? = null
     private var mActionBar: ActionBar? = null
+    private var searchButton: Button? = null
+    private var visitedPlacesButton: Button? = null
+
 
 
 
@@ -53,6 +51,8 @@ class MapFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener 
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
+
 
 
     override fun onCreateView(
@@ -80,10 +80,12 @@ class MapFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.buscar -> {
-                Log.i("BUSCAR", "YEESSSS!!!")
+            R.id.search -> {
+
             }
             else -> {
+                val intent = Intent(activity, VisitedPlaces::class.java)
+                startActivity(intent)
 
             }
         }

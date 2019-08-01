@@ -1,5 +1,6 @@
 package com.example.dr.turis_huma
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,12 +12,14 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.hbb20.CountryCodePicker
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -26,10 +29,16 @@ class MapsActivity : AppCompatActivity(),
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraIdleListener,
     GoogleMap.OnPolylineClickListener,
-    GoogleMap.OnPolygonClickListener{
+    GoogleMap.OnPolygonClickListener, CountryCodePicker.OnCountryChangeListener{
 
     private lateinit var mMap: GoogleMap
     private var tienePermisosLocalizacion = false
+
+
+    private var ccp: CountryCodePicker?=null
+    private var countryCode:String?=null
+    private var countryName:String?=null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,19 +50,58 @@ class MapsActivity : AppCompatActivity(),
         mapFragment.getMapAsync(this)
         assignFragments()
         openMapFragment()
+
+        ccp = findViewById(R.id.country_code_picker)
+        ccp!!.setOnCountryChangeListener(this)
+        ccp!!.setDefaultCountryUsingNameCode("EC")
+
+    }
+
+    override fun onCountrySelected() {
+        countryName=ccp!!.selectedCountryName
+
+        Toast.makeText(this,"Country Name "+countryName, Toast.LENGTH_SHORT).show()
+
+        if(countryName=="Colombia") {
+            setOnMap(mMap, 4.6097102, -74.081749)
+        } else {
+            setOnMap(mMap, -0.202760, -78.490813)
+        }
+
     }
 
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+
         mMap = googleMap
         getLocationPermissions()
         setMapConfiguration(mMap)
         setListenersMapMovements(mMap)
         val foch = LatLng(-0.202760, -78.490813)
-        val titulo = "Plaza foch"
+        val titulo = "Basílica"
         val zoom = 17f
         addMarker(foch, titulo)
+        moveCameraWithZoom(foch, zoom)
+        setNearByPlaces(googleMap)
+
+        mMap.setOnMarkerClickListener {marker ->
+
+            val intent = Intent(this, PlaceInfo::class.java)
+            startActivity(intent)
+            true
+
+        }
+
+    }
+
+    fun setOnMap(googleMap: GoogleMap, latitud: Double, longitud: Double) {
+        mMap = googleMap
+        getLocationPermissions()
+        setMapConfiguration(mMap)
+        setListenersMapMovements(mMap)
+        val foch = LatLng(latitud, longitud)
+        val zoom = 17f
         moveCameraWithZoom(foch, zoom)
         setNearByPlaces(googleMap)
     }
@@ -105,7 +153,7 @@ class MapsActivity : AppCompatActivity(),
     private fun openProfileFragment() {
         val fragment = ProfileFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment, fragment)
+        transaction.add(R.id.fragment, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
