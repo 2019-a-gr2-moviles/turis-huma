@@ -1,5 +1,6 @@
 package com.example.dr.turis_huma
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -78,11 +79,19 @@ class MapsActivity : AppCompatActivity(),
         setMapConfiguration(mMap)
         setListenersMapMovements(mMap)
         val foch = LatLng(-0.202760, -78.490813)
-        val titulo = "Plaza foch"
+        val titulo = "Basílica"
         val zoom = 17f
         addMarker(foch, titulo)
         moveCameraWithZoom(foch, zoom)
         setNearByPlaces(googleMap)
+
+        mMap.setOnMarkerClickListener {marker ->
+
+            val intent = Intent(this, PlaceInfo::class.java)
+            startActivity(intent)
+            true
+
+        }
 
     }
 

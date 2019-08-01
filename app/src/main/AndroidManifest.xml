@@ -25,6 +25,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:appComponentFactory">
+        <activity android:name=".PlaceInfo">
+        </activity>
         <activity android:name=".VisitedPlaces">
         </activity>
         <activity android:name=".ListOfCountries">
