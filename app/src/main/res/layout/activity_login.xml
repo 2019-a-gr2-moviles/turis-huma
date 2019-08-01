@@ -8,22 +8,22 @@
         tools:context=".LoginActivity" android:background="#166577">
 
     <ImageView
-            android:layout_width="227dp"
-            android:layout_height="267dp" app:srcCompat="@drawable/logo" android:id="@+id/logo_login"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="92dp" android:layout_marginTop="46dp"
+            android:layout_width="198dp"
+            android:layout_height="184dp" app:srcCompat="@drawable/logo" android:id="@+id/logo_login"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="92dp" android:layout_marginTop="25dp"
             android:layout_alignParentTop="true" android:layout_alignParentStart="true"
-            android:layout_marginStart="92dp"/>
+            android:layout_marginStart="121dp"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="37dp"
-            android:inputType="textMultiLine"
 
             android:ems="10"
             android:id="@+id/login_password" android:layout_alignParentEnd="true" android:layout_marginEnd="51dp"
             android:layout_alignParentStart="true" android:layout_marginStart="64dp"
             android:layout_marginTop="22dp" android:layout_below="@+id/login_username"
             android:fontFamily="@font/muli_light" android:background="@drawable/inputs" android:hint="  Contraseña"
-            android:drawableLeft="@drawable/password_icon25"/>
+            android:drawableLeft="@drawable/password_icon25"
+            android:inputType="textPassword"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="37dp"
@@ -44,7 +44,9 @@
             android:layout_alignEnd="@+id/login_password" android:layout_marginStart="4dp"
             android:layout_alignStart="@+id/login_password" android:layout_marginTop="243dp"
             android:layout_below="@+id/login_password" android:textAlignment="center"
-            android:fontFamily="@font/muli_light" android:textColor="@android:color/white"/>
+            android:fontFamily="@font/muli_light" android:textColor="@android:color/white"
+
+/>
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/facebook_logo"
@@ -59,9 +61,9 @@
             android:layout_below="@+id/login_password" android:background="@android:color/transparent"/>
     <Button
             android:text="Ingresar"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content" android:id="@+id/login_button" android:layout_alignParentEnd="true"
-            android:layout_marginEnd="141dp" android:layout_alignParentStart="true" android:layout_marginStart="150dp"
-            android:layout_marginTop="24dp" android:layout_below="@+id/login_password"
+            android:layout_width="143dp"
+            android:layout_height="37dp" android:id="@+id/login_button" android:layout_alignParentEnd="true"
+            android:layout_marginEnd="125dp" android:layout_alignParentStart="true" android:layout_marginStart="143dp"
+            android:layout_marginTop="33dp" android:layout_below="@+id/login_password"
             android:background="@drawable/button" android:fontFamily="@font/muli_light"/>
 </RelativeLayout>
